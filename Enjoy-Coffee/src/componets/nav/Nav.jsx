@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../../firebase-config";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import * as S from "./Nav";
 const Nav = () => {
-  const [isLoggedIn, setIsLoggeIn] = useState(false);
-
-  const checkLoginStatus = () => {
-    const userLoggedIn = localStorage.getItem("isLoggedIn");
-    setIsLoggeIn(userLoggedIn === "true");
-  };
+  const [user, setUser] = useState("");
   useEffect(() => {
-    checkLoginStatus();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
-  const handleLogout = () => {
-    localStorage.setItem("isLoggedIn");
-    setIsLoggeIn(false);
+  const logout = async () => {
+    await signOut(auth);
   };
   return (
     <div>
       <S.NavBar>
         <input type="text" placeholder="검색" />
-        {isLoggedIn ? (
-          <Link to="/" onClick={handleLogout}>
+        {user ? (
+          <Link to="/" onClick={logout}>
             로그아웃
           </Link>
         ) : (

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login_Logo from "../componets/login_logo/Login_Logo.jsx";
 import { auth } from "../firebase-config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import SignUpModal from "../componets/commons/SignUpModal.jsx";
 import { ModalBackground } from "../componets/commons/SignUpModal.js";
+import * as S from "./Auth.js";
 const Auth = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
@@ -22,10 +23,11 @@ const Auth = () => {
   const handleEmailChange = (e) => {
     const email = e.target.value;
     setRegisterEmail(email);
+    setEmailError("");
     if (!isEmailValid(email)) {
       setEmailError("유효하지 않은 이메일입니다.");
     } else {
-      setEmailError("");
+      checkEmailExistence(email);
     }
   };
   const handlePasswordChange = (e) => {
@@ -37,6 +39,16 @@ const Auth = () => {
       setPasswordError("");
     }
   };
+  const checkEmailExistence = async (email) => {
+    try {
+      const userCredential = await auth.fetchSignInMethodsForEmail(email);
+      if (userCredential.length > 0) {
+        setEmailError("이미 존재하는 이메일입니다.");
+      }
+    } catch (error) {
+      setEmailError("이미 존재하는 이메일입니다.");
+    }
+  };
   const register = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -44,48 +56,36 @@ const Auth = () => {
         registerEmail,
         registerPassword
       );
+      await signOut(auth);
       setShowModal(true);
       console.log(user);
     } catch (error) {
-      console.log(error.message);
+      if (error.code === "auth/email-already-in-use") {
+        setEmailError("이미 존재하는 이메일입니다.");
+      } else {
+        console.log(error.message);
+      }
     }
   };
-  // const closeModal = () => {
-  //   setShowModal(false);
-  // };
-  // const register = async () => {
-  //   try {
-  //     // 사용자 회원가입
-  //     const userCredential = await createUserWithEmailAndPassword(
-  //       auth,
-  //       registerEmail,
-  //       registerPassword
-  //     );
 
-  //     // 로그인
-  //     const user = userCredential.user;
-  //     console.log("회원가입 성공, 로그인됨:", user);
-
-  //     setShowModal(true);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
   return (
-    <div>
+    <S.Container>
       <Login_Logo />
-      <h1>Login</h1>
-
-      <input placeholder="이메일" onChange={handleEmailChange} required />
-      {emailError && <p style={{ color: "red" }}>{emailError}</p>}
-      <input placeholder="비밀번호" onChange={handlePasswordChange} required />
-      {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
-
-      <button onClick={register}>가입</button>
-
-      {showModal && <ModalBackground />}
-      {showModal && <SignUpModal />}
-    </div>
+      <S.LoginForm>
+        <h1>Login</h1>
+        <input placeholder="이메일" onChange={handleEmailChange} required />
+        {emailError && <p style={{ color: "red" }}>{emailError}</p>}
+        <input
+          placeholder="비밀번호"
+          onChange={handlePasswordChange}
+          required
+        />
+        {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
+        <button onClick={register}>가입</button>
+        {showModal && <ModalBackground />}
+        {showModal && <SignUpModal />}
+      </S.LoginForm>
+    </S.Container>
   );
 };
 

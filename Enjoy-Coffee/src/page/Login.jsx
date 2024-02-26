@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Login_Logo from "../componets/login_logo/Login_Logo.jsx";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase-config.js";
 import { useNavigate } from "react-router-dom";
-import {
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import * as S from "./Login.js";
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPasswrod, setLoginPassword] = useState("");
   const [user, setUser] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe;
+  }, []);
 
   const login = async () => {
     try {
@@ -28,40 +29,43 @@ const Login = () => {
       console.log(user);
       navigate("/");
     } catch (error) {
-      console.log(error.message);
+      if (error.code === "auth/invalid-credential") {
+        setError("이메일 또는 비밀번호를 잘못 입력했습니다. ");
+      } else {
+        console.log(error.message);
+      }
     }
   };
-  const logout = async () => {
-    await signOut(auth);
-  };
-  return (
-    <div>
-      <Login_Logo />
-      <h1>Login</h1>
 
-      <input
-        placeholder="이메일"
-        onChange={(e) => {
-          setLoginEmail(e.target.value);
-        }}
-        required
-      />
-      <input
-        placeholder="비밀번호"
-        onChange={(e) => {
-          setLoginPassword(e.target.value);
-        }}
-        required
-      />
-      <button onClick={login}>Login</button>
-      <button onClick={logout}>Logout</button>
-      <Link to="/Auth">회원가입</Link>
-      {user ? (
-        <p>현재 로그인된 사용자: {user.email}</p>
-      ) : (
-        <p>로그아웃 상태입니다.</p>
-      )}
-    </div>
+  return (
+    <S.Container>
+      <Login_Logo />
+      <S.LoginForm>
+        <h1>Login</h1>
+        <input
+          placeholder="이메일"
+          value={loginEmail}
+          onChange={(e) => {
+            setLoginEmail(e.target.value);
+          }}
+          required
+        />
+        <input
+          placeholder="비밀번호"
+          value={loginPasswrod}
+          onChange={(e) => {
+            setLoginPassword(e.target.value);
+          }}
+          required
+        />
+        <button onClick={login}>Login</button>
+
+        <Link to="/Auth" className="authButton">
+          회원가입
+        </Link>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </S.LoginForm>
+    </S.Container>
   );
 };
 
