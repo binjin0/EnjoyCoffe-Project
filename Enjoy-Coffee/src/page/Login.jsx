@@ -58,11 +58,12 @@ const Login = () => {
           }}
           required
         />
-        {error && <p>{error}</p>}
         <button onClick={login}>Login</button>
+
         <Link to="/Auth" className="authButton">
           회원가입
         </Link>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </S.LoginForm>
     </S.Container>
   );
