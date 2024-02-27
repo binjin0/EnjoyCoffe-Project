@@ -1,7 +1,12 @@
 import styled from "styled-components";
 export const Container = styled.div`
-  height: 100vh;
+  height: 90vh;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; */
 `;
+
 export const LoginForm = styled.div`
   display: flex;
   justify-content: center;
@@ -12,6 +17,7 @@ export const LoginForm = styled.div`
     font-family: "Nanum Myeongjo", serif;
     font-size: 40px;
     font-weight: bold;
+    color: #644444;
     /* margin-bottom: 40px; */
   }
   input,
@@ -38,6 +44,8 @@ export const LoginForm = styled.div`
     margin-top: 0.3rem;
     text-align: left;
     width: 40%;
+    color: #644444;
+    font-weight: bold;
   }
   button {
     background-color: #d9d9d9;

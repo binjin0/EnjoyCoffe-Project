@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NavBar = styled.div`
   display: flex;
-  height: 30px;
+  height: 40px;
   justify-content: flex-end;
   align-items: center;
   background-color: #d9d9d9;
@@ -19,10 +19,11 @@ export const NavBar = styled.div`
 
 export const MenuBar = styled.div`
   display: flex;
-  margin: 20px 50px;
+  padding: 20px 50px;
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
+  background-color: rgb(210, 208, 201);
 
   .logo {
     display: flex;

@@ -29,7 +29,8 @@ const Nav = () => {
           <Link to="/Login">로그인</Link>
         )}
         {/* <Link to="/Login">로그인</Link> */}
-        <Link to="/Auth">회원가입</Link>
+        {user ? null : <Link to="/Auth">회원가입</Link>}
+        {/* <Link to="/Auth">회원가입</Link> */}
         <Link to="/Cart">장바구니</Link>
       </S.NavBar>
       <S.MenuBar>

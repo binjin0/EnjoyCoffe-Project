@@ -13,6 +13,7 @@ export const LoginForm = styled.div`
     font-size: 40px;
     font-weight: bold;
     margin-bottom: 40px;
+    color: #4a3b2d;
   }
   input,
   button {
@@ -37,5 +38,10 @@ export const LoginForm = styled.div`
   button {
     background-color: #d9d9d9;
     cursor: pointer;
+  }
+  p {
+    margin-bottom: 1rem;
+    color: #644444;
+    font-weight: bold;
   }
 `;
