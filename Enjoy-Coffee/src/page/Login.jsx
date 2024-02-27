@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../firebase-config.js";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import * as S from "./Login.js";
+import * as S from "./LoginStyle.js";
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPasswrod, setLoginPassword] = useState("");

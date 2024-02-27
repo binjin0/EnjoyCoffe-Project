@@ -4,7 +4,7 @@ import { auth } from "../firebase-config";
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import SignUpModal from "../componets/commons/SignUpModal.jsx";
 import { ModalBackground } from "../componets/commons/SignUpModal.js";
-import * as S from "./Auth.js";
+import * as S from "./AuthStyle.js";
 const Auth = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Main from "./page/Main";
-import Login from "./page/Login";
-import Auth from "./page/Auth";
+import Login from "./page/Login.jsx";
+import Auth from "./page/Auth.jsx";
 function App() {
   return (
     <Routes>
