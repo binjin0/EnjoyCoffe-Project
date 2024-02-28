@@ -72,7 +72,8 @@ button:focus-visible {
 }
 body {
   /* background-color: rgb(246, 247, 225); */
-  background-color: rgb(210, 208, 201);
+  /* background-color: rgb(210, 208, 201); */
+  background-color: #d9d9d9;
 }
 html,
 body,
@@ -200,6 +201,7 @@ table {
 }
 a {
   text-decoration: none;
+  color: inherit;
   outline: none;
 }
 a:hover,

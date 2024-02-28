@@ -18,8 +18,8 @@ const Nav = () => {
     await signOut(auth);
   };
   return (
-    <div>
-      <S.NavBar>
+    <S.Container>
+      <div className="navbar">
         <input type="text" placeholder="검색" />
         {user ? (
           <Link to="/" onClick={logout}>
@@ -31,12 +31,12 @@ const Nav = () => {
         {/* <Link to="/Login">로그인</Link> */}
         <Link to="/Auth">회원가입</Link>
         <Link to="/Cart">장바구니</Link>
-      </S.NavBar>
-      <S.MenuBar>
-        <Link to="/">
+      </div>
+      <div className="menubar">
+        <Link to="/CoffeeBean">
           <h1>원두</h1>
         </Link>
-        <Link to="/">
+        <Link to="/Coffee">
           <h1>간편커피</h1>
         </Link>
         <Link to="/">
@@ -46,10 +46,10 @@ const Nav = () => {
             Coffee
           </div>
         </Link>
-        <Link to="/">생두</Link>
-        <Link to="/">시럽/소스</Link>
-      </S.MenuBar>
-    </div>
+        <Link to="/GreenBean">생두</Link>
+        <Link to="/Etc">시럽/소스</Link>
+      </div>
+    </S.Container>
   );
 };
 

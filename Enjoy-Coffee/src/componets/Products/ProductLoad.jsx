@@ -1,31 +1,53 @@
-import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { ProductState, productsURL } from "../../recoil/Products";
+import React from "react";
+import { useRecoilValue } from "recoil";
+import {
+  coffeebeans,
+  coffee,
+  greenbeans,
+  etc,
+} from "../../recoil/recoilSelector";
+import ProductCard from "./ProductCard";
+import * as S from "./ProductLoadStyle";
 
-function ProductLoad() {
-  const [productList, setProductList] = useRecoilState(ProductState);
+export const CoffeBeanLoaed = () => {
+  const coffeebeansList = useRecoilValue(coffeebeans);
+  return (
+    <S.Container>
+      {coffeebeansList.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </S.Container>
+  );
+};
+export const CoffeLoaed = () => {
+  const coffeebeansList = useRecoilValue(coffee);
+  return (
+    <S.Container>
+      {coffeebeansList.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </S.Container>
+  );
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(productsURL);
-        const data = await response.json();
-        setProductList(data);
-      } catch (error) {
-        console.log(`Error: \n${error}`);
-      }
-    };
+export const GreenBeanLoaed = () => {
+  const coffeebeansList = useRecoilValue(greenbeans);
+  return (
+    <S.Container>
+      {coffeebeansList.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </S.Container>
+  );
+};
 
-    if (productList.length === 0) {
-      fetchData();
-    }
-
-    return () => {
-      // cleanup 작업이 필요 없다면 생략해도 됩니다.
-    };
-  }, [productList, setProductList]);
-
-  return null;
-}
-
-export default ProductLoad;
+export const EtcLoaed = () => {
+  const coffeebeansList = useRecoilValue(etc);
+  return (
+    <S.Container>
+      {coffeebeansList.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </S.Container>
+  );
+};
