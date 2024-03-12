@@ -18,11 +18,14 @@ export const ModalContainer = styled.div`
 
   .modal-content {
     display: flex;
-    height: 220px;
+    height: 200px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 30px;
+  }
+  h1 {
+    font-size: 30px;
   }
   h2 {
     color: rgb(0, 0, 0, 0.7);

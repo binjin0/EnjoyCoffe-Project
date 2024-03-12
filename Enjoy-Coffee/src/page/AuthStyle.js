@@ -40,7 +40,8 @@ export const LoginForm = styled.div`
     width: 40%;
   }
   button {
-    background-color: #d9d9d9;
+    background-color: #25201c;
+    color: white;
     cursor: pointer;
   }
 `;

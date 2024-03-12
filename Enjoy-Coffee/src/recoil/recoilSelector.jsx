@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 import { DataState } from "./recoilState";
+import { CartState } from "./recoilState";
 export const coffeebeans = selector({
   key: "coffeebeans",
   get: ({ get }) => {
@@ -42,5 +43,16 @@ export const etc = selector({
       product.category.toLowerCase().includes("기타")
     );
     return result;
+  },
+});
+
+export const TotalPriceSelector = selector({
+  key: "TotlaPriceSelector",
+  get: ({ get }) => {
+    const cartItems = get(CartState);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   },
 });

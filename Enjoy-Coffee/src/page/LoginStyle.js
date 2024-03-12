@@ -35,7 +35,8 @@ export const LoginForm = styled.div`
     color: transparent;
   }
   button {
-    background-color: #d9d9d9;
+    background-color: #25201c;
     cursor: pointer;
+    color: white;
   }
 `;

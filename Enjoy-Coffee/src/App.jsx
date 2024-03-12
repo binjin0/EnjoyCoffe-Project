@@ -6,6 +6,10 @@ import CoffeeBean from "./page/CoffeeBean.jsx";
 import Coffee from "./page/Coffee.jsx";
 import Etc from "./page/etc.jsx";
 import GreenBean from "./page/GreenBean.jsx";
+import ProductDetail from "./page/ProductDetail.jsx";
+import Cart from "./page/Cart.jsx";
+import { DataState } from "./recoil/recoilState.jsx";
+import Wish from "./page/Wish.jsx";
 function App() {
   return (
     <Routes>
@@ -16,6 +20,9 @@ function App() {
       <Route path={"/Coffee"} element={<Coffee />} />
       <Route path={"/GreenBean"} element={<GreenBean />} />
       <Route path={"/Etc"} element={<Etc />} />
+      <Route path={"/:id"} element={<ProductDetail product={DataState} />} />
+      <Route path={"/Cart"} element={<Cart />} />
+      <Route path={"/Wish"} element={<Wish />} />
     </Routes>
   );
 }

@@ -1,16 +1,16 @@
 import React from "react";
 import Nav from "../componets/nav/Nav.jsx";
-import { CoffeBeanLoaed } from "../componets/Products/ProductLoad";
+import WishContent from "../componets/wish/WishContent";
 import Footer from "../componets/footer/footer.jsx";
 
-const CoffeeBean = () => {
+const Wish = () => {
   return (
     <div>
       <Nav />
-      <CoffeBeanLoaed />
+      <WishContent />
       <Footer />
     </div>
   );
 };
 
-export default CoffeeBean;
+export default Wish;
