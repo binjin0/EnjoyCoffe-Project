@@ -72,7 +72,7 @@ const Auth = () => {
     <S.Container>
       <Login_Logo />
       <S.LoginForm>
-        <h1>Login</h1>
+        <h1>회원가입</h1>
         <input placeholder="이메일" onChange={handleEmailChange} required />
         {emailError && <p style={{ color: "red" }}>{emailError}</p>}
         <input

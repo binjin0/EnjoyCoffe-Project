@@ -23,27 +23,27 @@ export const ModalContainer = styled.div`
     align-items: center;
     flex-direction: column;
     gap: 30px;
-  }
-  h1 {
-    font-size: 30px;
-  }
-  h2 {
-    color: rgb(0, 0, 0, 0.7);
-    font-size: 18px;
+    h1 {
+      font-size: 20px;
+    }
+    h2 {
+      color: rgb(0, 0, 0, 0.7);
+      font-size: 18px;
+    }
   }
   .modal-button {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
-  }
-  button {
-    width: 100px;
-    height: 30px;
-    background-color: #4a4747;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+    button {
+      width: 100px;
+      height: 30px;
+      background-color: #4a4747;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
   }
 `;
 export const ModalBackground = styled.div`
